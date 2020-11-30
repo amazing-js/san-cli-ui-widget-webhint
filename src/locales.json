@@ -1,0 +1,6 @@
+{
+    "san-cli-ui-widget-webhint": {
+        "title": "Webhint",
+        "description": "一键检查网页是否符合最佳实践"
+    }
+}

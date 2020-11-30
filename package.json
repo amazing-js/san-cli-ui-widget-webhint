@@ -1,0 +1,30 @@
+{
+  "name": "san-cli-ui-widget-webhint",
+  "version": "0.1.2",
+  "description": "san cli ui widget webhint",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development san serve --config san.config.js",
+    "build": "cross-env NODE_ENV=production san build --config san.config.js",
+    "prebuild": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "San CLI UI",
+    "CLI UI WIDGET",
+    "webhint"
+  ],
+  "author": "Lohoyo <824591872@qq.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "san-cli": "^3.0.0"
+  },
+  "dependencies": {
+    "hint": "^6.1.1"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
