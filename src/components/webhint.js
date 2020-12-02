@@ -31,7 +31,16 @@ export default {
     async lint() {
         this.data.set('isLoading', true);
         const res = await this.$callPluginAction('san-cli-ui-widget-webhint.actions.lint', this.data.get('inputValue'));
-        this.data.set('resultTips', res.results[0] ? '检查完毕，请在新标签页中查看结果。' : '检查失败，请输入有效的 URL。');
+        if (res && res.results && res.results[0]) {
+            const {errorCode, errorMessage} = res.results[0];
+            if (errorCode === 0) {
+                this.data.set('resultTips', '检查完毕，请在新标签页中查看结果。');
+            } else {
+                this.data.set('resultTips', errorMessage);
+            }
+        } else {
+            this.data.set('resultTips', '检查失败，不知道怎么回事。');
+        }
         this.data.set('isLoading', false);
         !this.data.set('isLinted') && this.data.set('isLinted', true);
     }

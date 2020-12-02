@@ -37,11 +37,22 @@ module.exports = api => {
             const res = execSync('npx hint ' + url, {encoding: 'utf8'})
         } catch (err) {
             if (err.stderr.indexOf('not an existing file nor a valid URL') !== -1) {
-                return false;
+                return {
+                    errorCode: 1,
+                    errorMessage: '检查失败，请输入有效的 URL。'
+                };
+            }
+            if (err.stderr.indexOf('AnalyzerError: Unable to parse axe results null') !== -1) {
+                return {
+                    errorCode: 2,
+                    errorMessage: '检查失败，请不要关闭弹出的窗口。'
+                };
             }
             lintRes = /".+"/.exec(err.stdout)[0];
         }
         execSync('open ' + lintRes);
-        return true;
+        return {
+            errorCode: 0
+        };
     });
 }
